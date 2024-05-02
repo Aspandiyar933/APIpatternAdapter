@@ -1,4 +1,4 @@
-package database 
+package database
 
 import (
 	"database/sql"
@@ -26,13 +26,15 @@ func (s *MySQLStorage) Init() (*sql.DB, error) {
 	if err := s.createTaskTable(); err != nil {
 		return nil, err
 	}
+	return s.db, nil
 }
 
 func (s *MySQLStorage) createTaskTable() error {
 	_, err := s.db.Exec(`
 		CREATE TABLE IF NOT EXISTS Todo (
 			id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-			description TEXT NOT NULL
+			description TEXT NOT NULL,
+			do BOOLEAN NOT NULL
 		)
 	`)
 	return err 

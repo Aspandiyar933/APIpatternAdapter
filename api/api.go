@@ -1,6 +1,7 @@
 package api
 
 import (
+	"github.com/Aspandiyar933/APIpatternAdapter/client"
 	"github.com/Aspandiyar933/APIpatternAdapter/store"
 	"github.com/gorilla/mux"
 )
@@ -21,5 +22,7 @@ func (a *APIServer) Serve() {
 	router := mux.NewRouter()
 	subrouter := router.PathPrefix("/adapter/v1").Subrouter()
 
-	
+	clientService := client.NewClientService(a.store)
+	clientService.RegisterRoutes(subrouter)
+
 }
